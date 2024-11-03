@@ -2,11 +2,15 @@
 #include <list>
 #include <typeinfo>
 
+#define spacing() cout << "\n\n"
+
 using std::list;
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
+
+// Lists are Sequence Containers: arranged according to the order of elements
 
 // GREAT FOR DOUBLY LINKED LISTS
 // Allows for non homogenous data
@@ -99,25 +103,74 @@ int main(int argc, char const *argv[]){
 
     // Iterating over a container
 
-    list<int> myList = {4,3,5,3,1};
+    list<int> myList = {40,30,50,30,10};
 
     // Using iterators to iterate through the list
     list<int>::iterator it = myList.begin();
     list<int>::iterator end = myList.end();
 
-    while(it != end)
+    while(it != end){
         cout << *it << " ";
-    it++;
+        it++;
+    }
 
-    cout << "\n\n\n";
-
-    for (auto i = myList.begin(); i != myList.end(); i++)
+    // Printing using a simple for loop
+    cout << "\n\n";
+    for (list<int>::iterator i = myList.begin(); i != myList.end(); ++i)
         cout << *i << " ";
-    
-    
+    spacing();
+
+    // USING SPLICING
+    list<int> listP1 = {1,1,1};
+    list<int> listP2 = {8,8,8};
+
+    list<int>::iterator iter = listP1.begin();
+    advance(iter,2); // Move the iterator one element
+
+    // Inserts a list at the iterator "index"
+    listP1.splice(iter , listP2);
+
+    for(auto elem: listP1)
+        cout << elem << " ";
+    spacing();
+
+    // Just splicing to the begining
+    list<int> GroupP1 = {1,1,1};
+    list<int> GroupP2 = {8,8,8};
+
+    GroupP1.splice(GroupP1.begin(), GroupP2);
+
+    list<int>::iterator gIt = GroupP1.begin();
+    list<int>::iterator gEnd = GroupP1.end();
+
+    while(gIt != gEnd){
+        cout << *gIt << " ";
+        gIt++;
+    }
+
+    // Simply merges the list
+    GroupP1.merge(myList);
+
+    gIt = GroupP1.begin();
+    gEnd = GroupP1.end();
+    while(gIt != gEnd){
+        cout << *gIt << " ";
+        gIt++;
+    }
+    spacing();
+
+    // Removes all copies of data
+    GroupP1.unique();
+
+    gIt = GroupP1.begin();
+    gEnd = GroupP1.end();
+    while(gIt != gEnd){
+        cout << *gIt << " ";
+        gIt++;
+    }
+    spacing();
 
 
-    cout << endl;
     
 
     return 0;
